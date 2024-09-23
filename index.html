@@ -1,0 +1,68 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camera Access with JavaScript</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .camera-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 700px;
+            text-align: center;
+        }
+
+        .camera-card h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        #camera-stream {
+            border-radius: 8px;
+            border: 2px solid #ddd;
+            width: 100%;
+            height: auto;
+        }
+
+        .camera-card .camera-info {
+            margin-top: 10px;
+            color: #666;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="camera-card">
+        <h1>Live Camera Stream</h1>
+        <video id="camera-stream" width="640" height="480" autoplay></video>
+        <div class="camera-info">Your camera is currently streaming live</div>
+    </div>
+
+    <script>
+        const enableCamera = async () => {
+            try {
+                const videoElement = document.getElementById('camera-stream');
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                videoElement.srcObject = stream;
+            } catch (error) {
+                console.error('Error accessing the camera:', error);
+            }
+        };
+
+        window.onload = enableCamera;
+    </script>
+</body>
+</html>
